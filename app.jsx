@@ -20,15 +20,10 @@ class Board extends React.Component {
   render() {
     const { xIsNext, squares } = this.props;
     const winner =  calculateWinner(squares);
-    let status;
-    if (winner) {
-      status = 'Winner: ' + winner;
-    } else {
-      status = 'Next player: ' + (xIsNext ? 'X' : 'O');
-    }
+
     return (
       <div>
-        <div className="status">{status}</div>
+        <div className="status">{}</div>
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -77,13 +72,20 @@ class Game extends React.Component {
     const current = history[history.length - 1];
     const winner = calculateWinner(current.squares);
 
+    let status;
+    if (winner) {
+      status = 'Winner: ' + winner;
+    } else {
+      status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    }
+
     return (
       <div className="game">
         <div className="game-board">
           <Board squares={current.squares} xIsNext={xIsNext} handleClick={(i) => this.handleClick(i)} />
         </div>
         <div className="game-info">
-          <div>{/* status */}</div>
+          <div>{status}</div>
           <ol>{/* TODO */}</ol>
         </div>
       </div>
